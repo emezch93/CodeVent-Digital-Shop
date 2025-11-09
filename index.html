@@ -125,6 +125,12 @@
             transition: var(--transition);
         }
 
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
         /* Hero */
         .hero {
             padding: 6rem 2rem 4rem;
@@ -435,23 +441,52 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 72px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            body.dark-mode .nav-links {
+                background: var(--light);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--light-gray);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
             .hero p {
                 font-size: 1.1rem;
             }
-            .nav-links {
-                display: none;
-            }
-            .hamburger {
-                display: block;
-                cursor: pointer;
-                font-size: 1.5rem;
-            }
         }
 
         @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
             .hero {
                 padding: 4rem 1rem 2rem;
             }
@@ -476,7 +511,10 @@
             <i class="fas fa-shopping-bag"></i>
             CodeVent Shop
         </a>
-        <div class="nav-links">
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
             <a href="#home" class="nav-link">Home</a>
             <a href="#ebooks" class="nav-link">E-books</a>
             <a href="#courses" class="nav-link">Courses</a>
@@ -590,7 +628,7 @@
                 <div class="card-content">
                     <h3 class="card-title">Learn HTML, CSS, and JavaScript from Scratch</h3>
                     <p class="card-desc">A complete beginner-friendly course with 20+ projects, quizzes, and lifetime access. Full video series delivered via WhatsApp after purchase.</p>
-                    <a href="https://paystack.com/buy/swift-web-development-mastery-tevbzs" target="_blank" class="btn btn-primary">Get Course</a>
+                    <a href="https://paystack.com/buy/swift-web-development-mastery-tevbzs" target="_blank" rel="noopener" class="btn btn-primary">Get Course</a>
                 </div>
             </div>
         </div>
@@ -610,7 +648,7 @@
                 <div class="card-content">
                     <h3 class="card-title">Interactive Quiz App</h3>
                     <p class="card-desc">Fully responsive quiz app with timer, score tracking, and admin panel.</p>
-                    <a href="Contact.html" target="_blank" class="btn btn-primary">Get Source Code</a>
+                    <a href="Contact.html" target="_blank" rel="noopener" class="btn btn-primary">Get Source Code</a>
                 </div>
             </div>
 
@@ -621,7 +659,7 @@
                 <div class="card-content">
                     <h3 class="card-title">Code Editor Project</h3>
                     <p class="card-desc">In-browser code editor with syntax highlighting and live preview.</p>
-                    <a href="Contact.html" target="_blank" class="btn btn-primary">Get Source Code</a>
+                    <a href="Contact.html" target="_blank" rel="noopener" class="btn btn-primary">Get Source Code</a>
                 </div>
             </div>
 
@@ -633,7 +671,7 @@
                     <h3 class="card-title">Real-Time Generator</h3>
                     <p class="card-desc">AI-powered content generator with real-time output and export options.
                     Also get access to source codes of any project idea. </p>
-                    <a href="Contact.html" target="_blank" class="btn btn-primary">Get Source Code</a>
+                    <a href="Contact.html" target="_blank" rel="noopener" class="btn btn-primary">Get Source Code</a>
                 </div>
             </div>
         </div>
@@ -646,20 +684,6 @@
             <p>Reach out for inquiries, support, or to purchase any product.</p>
         </div>
         <div class="contact-form">
-            <!--div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" class="form-control" required placeholder="Tell us which product you're interested in..."></textarea>
-            </div>
-            <button class="btn btn-primary" id="submitContact">Send Message</button-->
-
             <div class="contact-info">
                 <a href="https://wa.me/2348185947780?text=Hello%20👋,%20I'm%20in%20your%20shopping%20products%20please%20tell%20more%20about%20it%20%F0%9F%A5%B0" target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i> WhatsApp: +234 818 594 7780
@@ -694,10 +718,11 @@
             </div>
             <div class="modal-body">
                 <div class="modal-preview" id="modalPreviewText"></div>
-                <div class="locked-section">
+                <div class="locked-section" id="unlockSection">
                     <p>🔒 <strong>Full content locked!</strong></p>
                     <p>Unlock to read more and gain lifetime access.</p>
-                    <a href="https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai" target="_blank" class="btn btn-primary" style="max-width: 200px; margin: 1rem auto;">Unlock Full Book</a>
+                    <!-- Dynamic button will be set by JS -->
+                    <a id="unlockButton" class="btn btn-primary" style="max-width: 200px; margin: 1rem auto;">Unlock Full Book</a>
                 </div>
             </div>
         </div>
@@ -729,6 +754,21 @@
             themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -743,31 +783,35 @@
             });
         });
 
-        // E-book Previews
+        // E-book Previews & Unlock Logic
         const ebooks = {
             physics: {
                 title: "Mastering WAEC Physics in 4 Weeks",
                 content: `<p>This comprehensive guide breaks down WAEC Physics syllabus into 4 weekly modules. Week 1 covers measurements and units, motion, and forces. You'll learn through worked examples, common exam pitfalls, and 10 practice questions per topic.</p>
                 <p>Each chapter includes:<br>• Key formulas highlighted<br>• Diagram-based explanations<br>• Past WAEC questions with solutions<br>• Quick revision summaries</p>
-                <p>Week 2 dives into energy, work, power, and machines...</p>`
+                <p>Week 2 dives into energy, work, power, and machines...</p>`,
+                unlockUrl: "Contact.html"
             },
             creation: {
                 title: "Ultimate Guide to E-Book Creation",
                 content: `<p>Turn your knowledge into profitable digital products with this step-by-step blueprint. Learn how to choose profitable niches, outline compelling content, design professional covers, and set up automated delivery systems.</p>
                 <p>You'll discover:<br>• 5 proven e-book formats that sell<br>• Tools for writing, formatting, and converting<br>• Pricing strategies for maximum revenue<br>• Marketing funnels that convert readers into buyers</p>
-                <p>Includes templates for Notion, Google Docs, and Canva...</p>`
+                <p>Includes templates for Notion, Google Docs, and Canva...</p>`,
+                unlockUrl: "Contact.html"
             },
             ai1: {
                 title: "THE DIGITAL WORLD — Version 1.0",
                 content: `<p>Artificial Intelligence is reshaping every industry — and this guide shows you how to profit from it. Discover 12 high-income digital skills, emerging job roles, and freelance opportunities in AI-driven markets.</p>
                 <p>You'll explore:<br>• AI tools that automate content creation<br>• How to build AI-enhanced digital products<br>• Monetization models for AI services<br>• Case studies of creators earning $1K+/month</p>
-                <p>Perfect for beginners with no technical background...</p>`
+                <p>Perfect for beginners with no technical background...</p>`,
+                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai"
             },
             ai2: {
                 title: "THE DIGITAL WORLD — Version 2.0",
                 content: `<p>The expanded edition includes everything from v1.0 plus advanced strategies for scaling your digital business. New sections cover AI-powered automation, building digital agencies, and creating subscription-based products.</p>
                 <p>Additional content:<br>• Building AI chatbots for client services<br>• Creating and selling AI prompt libraries<br>• Advanced Notion automation templates<br>• Scaling to $5K/month with digital products</p>
-                <p>Includes 40+ real-world examples and templates...</p>`
+                <p>Includes 40+ real-world examples and templates...</p>`,
+                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai"
             }
         };
 
@@ -777,6 +821,18 @@
                 const book = ebooks[bookKey];
                 document.getElementById('modalBookTitle').textContent = book.title;
                 document.getElementById('modalPreviewText').innerHTML = book.content;
+                
+                // Set the correct unlock URL based on book type
+                const unlockBtn = document.getElementById('unlockButton');
+                unlockBtn.href = book.unlockUrl;
+                if (bookKey === 'physics' || bookKey === 'creation') {
+                    unlockBtn.setAttribute('target', '_self');
+                    unlockBtn.removeAttribute('rel');
+                } else {
+                    unlockBtn.setAttribute('target', '_blank');
+                    unlockBtn.setAttribute('rel', 'noopener');
+                }
+                
                 document.getElementById('previewModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -801,14 +857,6 @@
                 acctDiv.style.display = 'block';
                 document.getElementById('showAcct').innerHTML = '<i class="fas fa-unlock"></i> Account details revealed';
             }
-        });
-
-        // Form Submission
-        document.getElementById('submitContact').addEventListener('click', () => {
-            alert('Thank you! Your message has been sent. We’ll contact you shortly.');
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('message').value = '';
         });
     </script>
 </body>
