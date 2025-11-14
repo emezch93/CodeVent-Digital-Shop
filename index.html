@@ -576,21 +576,21 @@
         <div class="shop-grid">
             <!-- E-book 1 -->
             <div class="shop-card">
-                <img src="Physics-img.png" alt="Mastering WAEC Physics" class="card-img">
+                <img src="AI-hustle.png" alt="AI Powered Side Hustles" class="card-img">
                 <div class="card-content">
-                    <h3 class="card-title">Mastering WAEC Physics in 4 Weeks</h3>
-                    <p class="card-desc">Ace your physics exams with this concise, exam-focused guide.</p>
-                    <button class="btn btn-primary open-preview" data-book="physics">Preview</button>
+                    <h3 class="card-title">AI Powered Side Hustles</h3>
+                    <p class="card-desc">Ace your daily, weekly and monthly earning using this guide.</p>
+                    <button class="btn btn-primary open-preview" data-book="ai-hustle">Preview</button>
                 </div>
             </div>
 
             <!-- E-book 2 -->
             <div class="shop-card">
-                <img src="Ebook-img.png" alt="E-Book Creation Guide" class="card-img">
+                <img src="100-free-tools.png" alt="100 Free AI tools" class="card-img">
                 <div class="card-content">
-                    <h3 class="card-title">Ultimate Guide to E-Book Creation</h3>
-                    <p class="card-desc">Learn how to create, design, and sell your own e-books profitably.</p>
-                    <button class="btn btn-primary open-preview" data-book="creation">Preview</button>
+                    <h3 class="card-title">100 Free AI Tools for Creation, Students & Freelancers</h3>
+                    <p class="card-desc">Learn how to create, design, and sell your own digital, companies or anything of your vision using these seamless free tools.</p>
+                    <button class="btn btn-primary open-preview" data-book="ai-tools">Preview</button>
                 </div>
             </div>
 
@@ -721,7 +721,6 @@
                 <div class="locked-section" id="unlockSection">
                     <p>🔒 <strong>Full content locked!</strong></p>
                     <p>Unlock to read more and gain lifetime access.</p>
-                    <!-- Dynamic button will be set by JS -->
                     <a id="unlockButton" class="btn btn-primary" style="max-width: 200px; margin: 1rem auto;">Unlock Full Book</a>
                 </div>
             </div>
@@ -762,7 +761,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -785,33 +783,43 @@
 
         // E-book Previews & Unlock Logic
         const ebooks = {
+            'ai-hustle': {
+                title: "AI Powered Side Hustles",
+                content: `<p>Discover how to generate daily, weekly, and monthly income using AI tools and automation. This guide reveals practical side hustle ideas with real case studies.</p>
+                <p>You'll learn:<br>• 10 proven AI side hustle models<br>• Tools to automate client acquisition<br>• Pricing strategies that convert<br>• How to scale from $100 to $1000+/month</p>`,
+                unlockUrl: "https://paystack.com/buy/ai-powered-side-hustles-how-to-earn-daily-weekly-and--bqinic",
+                external: true
+            },
+            'ai-tools': {
+                title: "100 Free AI Tools for Creators, Students & Freelancers",
+                content: `<p>This comprehensive guide catalogs 100+ free AI tools that can revolutionize your workflow. Organized by category: writing, design, coding, video, audio, and more.</p>
+                <p>Includes:<br>• Direct links to each tool<br>• Use cases and tutorials<br>• Productivity hacks<br>• How to combine tools for maximum impact</p>`,
+                unlockUrl: "https://paystack.com/buy/100-free-ai-tools-for-creators-students--freelancers--nfdkbf",
+                external: true
+            },
             physics: {
                 title: "Mastering WAEC Physics in 4 Weeks",
                 content: `<p>This comprehensive guide breaks down WAEC Physics syllabus into 4 weekly modules. Week 1 covers measurements and units, motion, and forces. You'll learn through worked examples, common exam pitfalls, and 10 practice questions per topic.</p>
                 <p>Each chapter includes:<br>• Key formulas highlighted<br>• Diagram-based explanations<br>• Past WAEC questions with solutions<br>• Quick revision summaries</p>
                 <p>Week 2 dives into energy, work, power, and machines...</p>`,
-                unlockUrl: "Contact.html"
-            },
-            creation: {
-                title: "Ultimate Guide to E-Book Creation",
-                content: `<p>Turn your knowledge into profitable digital products with this step-by-step blueprint. Learn how to choose profitable niches, outline compelling content, design professional covers, and set up automated delivery systems.</p>
-                <p>You'll discover:<br>• 5 proven e-book formats that sell<br>• Tools for writing, formatting, and converting<br>• Pricing strategies for maximum revenue<br>• Marketing funnels that convert readers into buyers</p>
-                <p>Includes templates for Notion, Google Docs, and Canva...</p>`,
-                unlockUrl: "Contact.html"
+                unlockUrl: "Contact.html",
+                external: false
             },
             ai1: {
                 title: "THE DIGITAL WORLD — Version 1.0",
                 content: `<p>Artificial Intelligence is reshaping every industry — and this guide shows you how to profit from it. Discover 12 high-income digital skills, emerging job roles, and freelance opportunities in AI-driven markets.</p>
                 <p>You'll explore:<br>• AI tools that automate content creation<br>• How to build AI-enhanced digital products<br>• Monetization models for AI services<br>• Case studies of creators earning $1K+/month</p>
                 <p>Perfect for beginners with no technical background...</p>`,
-                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai"
+                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai",
+                external: true
             },
             ai2: {
                 title: "THE DIGITAL WORLD — Version 2.0",
                 content: `<p>The expanded edition includes everything from v1.0 plus advanced strategies for scaling your digital business. New sections cover AI-powered automation, building digital agencies, and creating subscription-based products.</p>
                 <p>Additional content:<br>• Building AI chatbots for client services<br>• Creating and selling AI prompt libraries<br>• Advanced Notion automation templates<br>• Scaling to $5K/month with digital products</p>
                 <p>Includes 40+ real-world examples and templates...</p>`,
-                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai"
+                unlockUrl: "https://paystack.com/buy/the-digital-world-unveiling-opportunities-in-the-age--of--ai",
+                external: true
             }
         };
 
@@ -822,15 +830,14 @@
                 document.getElementById('modalBookTitle').textContent = book.title;
                 document.getElementById('modalPreviewText').innerHTML = book.content;
                 
-                // Set the correct unlock URL based on book type
                 const unlockBtn = document.getElementById('unlockButton');
                 unlockBtn.href = book.unlockUrl;
-                if (bookKey === 'physics' || bookKey === 'creation') {
-                    unlockBtn.setAttribute('target', '_self');
-                    unlockBtn.removeAttribute('rel');
-                } else {
+                if (book.external) {
                     unlockBtn.setAttribute('target', '_blank');
                     unlockBtn.setAttribute('rel', 'noopener');
+                } else {
+                    unlockBtn.setAttribute('target', '_self');
+                    unlockBtn.removeAttribute('rel');
                 }
                 
                 document.getElementById('previewModal').classList.add('active');
@@ -850,7 +857,6 @@
             }
         });
 
-        // Account Details Toggle
         document.getElementById('showAcct').addEventListener('click', () => {
             const acctDiv = document.getElementById('acctDetails');
             if (acctDiv.style.display === 'none') {
