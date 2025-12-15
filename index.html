@@ -17,6 +17,8 @@
             --light-gray: #e2e8f0;
             --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --locked-bg-light: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 10px, rgba(0,0,0,0.1) 10px 20px);
+            --locked-bg-dark: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 10px, rgba(255,255,255,0.06) 10px 20px);
         }
 
         * {
@@ -251,6 +253,26 @@
             color: white;
         }
 
+        /* Badge */
+        .badge {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            align-self: flex-start;
+            white-space: nowrap;
+        }
+
+        .card-content > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
         /* Section Headers */
         .section-header {
             text-align: center;
@@ -339,27 +361,24 @@
             line-height: 1.8;
         }
 
+        .modal-preview ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .modal-preview li {
+            margin-bottom: 0.5rem;
+        }
+
         .locked-section {
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(0,0,0,0.05),
-                rgba(0,0,0,0.05) 10px,
-                rgba(0,0,0,0.1) 10px,
-                rgba(0,0,0,0.1) 20px
-            );
+            background: var(--locked-bg-light);
             padding: 2rem;
             border-radius: 12px;
             text-align: center;
         }
 
         body.dark-mode .locked-section {
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(255,255,255,0.03),
-                rgba(255,255,255,0.03) 10px,
-                rgba(255,255,255,0.06) 10px,
-                rgba(255,255,255,0.06) 20px
-            );
+            background: var(--locked-bg-dark);
         }
 
         /* Contact Form */
@@ -498,6 +517,11 @@
             }
             .btn {
                 padding: 0.6rem 1.25rem;
+                font-size: 0.95rem;
+            }
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.4rem;
             }
         }
     </style>
@@ -536,10 +560,10 @@
     <div class="shop-grid">
         <!-- E-books -->
         <div class="shop-card">
-            <img src="Ebook-img.png" alt="E-book Creation Guide" class="card-img">
+            <img src="1764618941.png" alt="E-book Creation Guide" class="card-img">
             <div class="card-content">
                 <h3 class="card-title">E-books</h3>
-                <p class="card-desc">Premium guides on physics, AI, and digital creation — written for students and creators.</p>
+                <p class="card-desc">Premium guides on business, technology, AI, and digital creation — written for developers, students, entrepreneurs and creators.</p>
                 <a href="#ebooks" class="btn btn-outline">Explore E-books</a>
             </div>
         </div>
@@ -574,6 +598,19 @@
             <p>Unlock knowledge with our expertly crafted digital guides.</p>
         </div>
         <div class="shop-grid">
+            <!-- NEW PRODUCT: Just My Smartphone -->
+            <div class="shop-card">
+                <img src="front_cover_design_20.png" alt="Just My Smartphone – Build Digital Income Using Only Your Phone" class="card-img">
+                <div class="card-content">
+                    <div>
+                        <h3 class="card-title">Just My Smartphone</h3>
+                        <span class="badge">📱 Mobile</span>
+                    </div>
+                    <p class="card-desc">What if the only tool you needed to start building digital income was already in your hand? A strategic playbook for skill acquisition, monetization, and AI workflows — all on your smartphone.</p>
+                    <button class="btn btn-primary open-preview" data-book="just-my-smartphone">Read Preview → Unlock</button>
+                </div>
+            </div>
+
             <!-- E-book 1: AI Powered Side Hustles -->
             <div class="shop-card">
                 <img src="ai_side_hustle_cover__2.png" alt="AI Powered Side Hustles" class="card-img">
@@ -684,7 +721,7 @@
         </div>
         <div class="contact-form">
             <div class="contact-info">
-                <a href="https://wa.me/2348185947780?text=Hello%20,%20I'm%20in%20your%20shopping%20products%20please%20tell%20more%20about%20it%20%F0%9F%A5%B0" target="_blank" rel="noopener">
+                <a href="https://wa.me/2348185947780?text=Hello%20 ,%20I'm%20in%20your%20shopping%20products%20please%20tell%20more%20about%20it%20%F0%9F%A5%B0" target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i> WhatsApp: +234 818 594 7780
                 </a>
                 <a href="tel:+2348185947780" target="_blank" rel="noopener">
@@ -782,6 +819,20 @@
 
         // E-book Previews & Unlock Logic
         const ebooks = {
+            'just-my-smartphone': {
+                title: "Just My Smartphone",
+                content: `<p>What if the only tool you needed to start building digital income was already in your hand?</p>
+                <p><strong>Just My Smartphone</strong> is a strategic playbook for navigating the digital economy using mobile technology alone. It covers:</p>
+                <ul>
+                    <li>Mobile-optimized skill acquisition paths (no laptop needed)</li>
+                    <li>5 proven monetization models for creators, students & freelancers</li>
+                    <li>AI-powered workflows using free mobile apps</li>
+                    <li>Modern productivity systems that fit in your pocket</li>
+                </ul>
+                <p>This ebook is designed for people who want clarity, structure, and real use-cases — not motivation.</p>`,
+                unlockUrl: "https://paystack.com/buy/just-my-smartphone-jlxyet",
+                external: true
+            },
             'ai-hustle': {
                 title: "AI Powered Side Hustles",
                 content: `<p>Turn AI into your 24/7 income engine with proven models that generate daily, weekly, and monthly revenue. This isn't theory—it's battle-tested strategy.</p>
